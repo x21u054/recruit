@@ -20,8 +20,7 @@ Resources:
             
             def lambda_handler(event, context):
                 initLogger()
-                _logger.info('testFukushima: start\n')
-            
+
                 # TODO implement
                 #Amazon Connectからインスタンスとキューを取得
                 _logger.info('Amazon Connectからインスタンスとキューを取得\n')
@@ -65,8 +64,8 @@ Resources:
                 #DynamoDBからインスタンス、キュー、現在日時を基にレコードを取得
                 _logger.info('DynamoDBからインスタンス、キュー、現在日時を基にレコードを取得\n')
                 #テーブル名とパーティションキーのマッピング
-                if instanceName == "intellilink-internship-2023-summer-test":
-                    tableName = 'intellilink-internship-2023-summer-test_rest_biz'
+                if instanceName == "インスタンス名":
+                    tableName = 'テーブル名'
                     _logger.info('DynamoDBのテーブルとインスタンス名の紐づけに成功しました\n')
                 else:
                     _logger.info('DynamoDBのテーブルとインスタンス名の紐づけに失敗しました\n')
@@ -328,9 +327,9 @@ Resources:
               - dynamodb:query
             Resource:
               - "*"
-              - "arn:aws:logs:ap-northeast-1:197753689022:*"
-              - "arn:aws:connect:ap-northeast-1:197753689022:instance/1cb2052e-5070-48ea-ad67-d90848f54e0b"
-              - "arn:aws:dynamodb:ap-northeast-1:197753689022:table/intellilink-internship-2023-summer-test_rest_biz"
+              - "arn:aws:logs:ap-northeast-1:アカウントID:*"
+              - "arn:aws:connect:ap-northeast-1:アカウントID:instance/インスタンスID"
+              - "arn:aws:dynamodb:ap-northeast-1:アカウントID:table/テーブル名"
 Outputs:
   QueryIsOpenFunctionArn:
     Value: !GetAtt QueryIsOpenFunction.Arn

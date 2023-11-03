@@ -4,4 +4,4 @@ Resources:
   MyS3Bucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: intellilink-internship-2023-summer-bucket-biz
+      BucketName: バケット名

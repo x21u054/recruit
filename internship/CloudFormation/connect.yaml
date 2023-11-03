@@ -6,7 +6,7 @@ Resources:
     Properties: 
       Name: MyContactFlow_biz
       Description: This is a business contact flow
-      InstanceArn: 'arn:aws:connect:ap-northeast-1:197753689022:instance/1cb2052e-5070-48ea-ad67-d90848f54e0b'
+      InstanceArn: 'arn:aws:connect:ap-northeast-1:アカウントID:instance/インスタンスID'
       Type: CONTACT_FLOW
       Content: |
         {
@@ -32,7 +32,7 @@ Resources:
                 },
                 "contactFlow": {
                   "text": "Default agent whisper",
-                  "id": "arn:aws:connect:ap-northeast-1:197753689022:instance/1cb2052e-5070-48ea-ad67-d90848f54e0b/contact-flow/4327c33b-504c-46ac-aca3-f403b1337c00"
+                  "id": "arn:aws:connect:ap-northeast-1:アカウントID:instance/インスタンスID/contact-flow/4327c33b-504c-46ac-aca3-f403b1337c00"
                 },
                 "customerOrAgent": false
               },
@@ -50,7 +50,7 @@ Resources:
                 },
                 "contactFlow": {
                   "text": "Default customer whisper",
-                  "id": "arn:aws:connect:ap-northeast-1:197753689022:instance/1cb2052e-5070-48ea-ad67-d90848f54e0b/contact-flow/7656b28f-1130-4414-a389-fa17eb4feec9"
+                  "id": "arn:aws:connect:ap-northeast-1:アカウントID:instance/インスタンスID/contact-flow/7656b28f-1130-4414-a389-fa17eb4feec9"
                 },
                 "customerOrAgent": true
               },
@@ -81,7 +81,7 @@ Resources:
                 },
                 "contactFlow": {
                   "text": "Default customer hold",
-                  "id": "arn:aws:connect:ap-northeast-1:197753689022:instance/1cb2052e-5070-48ea-ad67-d90848f54e0b/contact-flow/d24dde04-e967-44f8-adff-dc45acdff953"
+                  "id": "arn:aws:connect:ap-northeast-1:アカウントID:instance/インスタンスID/contact-flow/d24dde04-e967-44f8-adff-dc45acdff953"
                 },
                 "customerOrAgent": true
               },
@@ -105,7 +105,7 @@ Resources:
                 },
                 "contactFlow": {
                   "text": "Default agent hold",
-                  "id": "arn:aws:connect:ap-northeast-1:197753689022:instance/1cb2052e-5070-48ea-ad67-d90848f54e0b/contact-flow/f791902a-90c5-438b-8b3f-f51e2bb86df3"
+                  "id": "arn:aws:connect:ap-northeast-1:アカウントID:instance/インスタンスID/contact-flow/f791902a-90c5-438b-8b3f-f51e2bb86df3"
                 },
                 "customerOrAgent": false
               },
@@ -123,7 +123,7 @@ Resources:
                 },
                 "contactFlow": {
                   "text": "Default customer queue",
-                  "id": "arn:aws:connect:ap-northeast-1:197753689022:instance/1cb2052e-5070-48ea-ad67-d90848f54e0b/contact-flow/49021e03-7dea-4515-98c8-e9752ea46245"
+                  "id": "arn:aws:connect:ap-northeast-1:アカウントID:instance/インスタンスID/contact-flow/49021e03-7dea-4515-98c8-e9752ea46245"
                 },
                 "customerOrAgent": true
               },
@@ -198,7 +198,7 @@ Resources:
                 },
                 "queue": {
                   "text": "BasicQueue",
-                  "id": "arn:aws:connect:ap-northeast-1:197753689022:instance/1cb2052e-5070-48ea-ad67-d90848f54e0b/queue/497bd076-b884-4dae-8a08-a022071f7fa7"
+                  "id": "arn:aws:connect:ap-northeast-1:アカウントID:instance/インスタンスID/queue/497bd076-b884-4dae-8a08-a022071f7fa7"
                 }
               },
               "4d03cbcb-1819-43cf-a2a9-9a97509003a5": {
@@ -262,7 +262,7 @@ Resources:
             {
               "Parameters": {
                 "EventHooks": {
-                  "AgentWhisper": "arn:aws:connect:ap-northeast-1:197753689022:instance/1cb2052e-5070-48ea-ad67-d90848f54e0b/contact-flow/4327c33b-504c-46ac-aca3-f403b1337c00"
+                  "AgentWhisper": "arn:aws:connect:ap-northeast-1:アカウントID:instance/インスタンスID/contact-flow/4327c33b-504c-46ac-aca3-f403b1337c00"
                 }
               },
               "Identifier": "7ea862ff-9a1c-4ab1-8fb5-60321b4ae340",
@@ -280,7 +280,7 @@ Resources:
             {
               "Parameters": {
                 "EventHooks": {
-                  "CustomerWhisper": "arn:aws:connect:ap-northeast-1:197753689022:instance/1cb2052e-5070-48ea-ad67-d90848f54e0b/contact-flow/7656b28f-1130-4414-a389-fa17eb4feec9"
+                  "CustomerWhisper": "arn:aws:connect:ap-northeast-1:アカウントID:instance/インスタンスID/contact-flow/7656b28f-1130-4414-a389-fa17eb4feec9"
                 }
               },
               "Identifier": "fb0c7527-6561-49b3-a6df-cade102a9ece",
@@ -320,7 +320,7 @@ Resources:
             {
               "Parameters": {
                 "EventHooks": {
-                  "CustomerHold": "arn:aws:connect:ap-northeast-1:197753689022:instance/1cb2052e-5070-48ea-ad67-d90848f54e0b/contact-flow/d24dde04-e967-44f8-adff-dc45acdff953"
+                  "CustomerHold": "arn:aws:connect:ap-northeast-1:アカウントID:instance/インスタンスID/contact-flow/d24dde04-e967-44f8-adff-dc45acdff953"
                 }
               },
               "Identifier": "ad717a0c-46fd-47a5-b9d4-1b1e7bd27efe",
@@ -369,7 +369,7 @@ Resources:
             {
               "Parameters": {
                 "EventHooks": {
-                  "AgentHold": "arn:aws:connect:ap-northeast-1:197753689022:instance/1cb2052e-5070-48ea-ad67-d90848f54e0b/contact-flow/f791902a-90c5-438b-8b3f-f51e2bb86df3"
+                  "AgentHold": "arn:aws:connect:ap-northeast-1:アカウントID:instance/インスタンスID/contact-flow/f791902a-90c5-438b-8b3f-f51e2bb86df3"
                 }
               },
               "Identifier": "b36eb868-2375-43ad-8a1f-5c93a17500ae",
@@ -387,7 +387,7 @@ Resources:
             {
               "Parameters": {
                 "EventHooks": {
-                  "CustomerQueue": "arn:aws:connect:ap-northeast-1:197753689022:instance/1cb2052e-5070-48ea-ad67-d90848f54e0b/contact-flow/49021e03-7dea-4515-98c8-e9752ea46245"
+                  "CustomerQueue": "arn:aws:connect:ap-northeast-1:アカウントID:instance/インスタンスID/contact-flow/49021e03-7dea-4515-98c8-e9752ea46245"
                 }
               },
               "Identifier": "142182e9-f988-4377-8656-f8c9e991f1b1",
@@ -420,7 +420,7 @@ Resources:
             },
             {
               "Parameters": {
-                "QueueId": "arn:aws:connect:ap-northeast-1:197753689022:instance/1cb2052e-5070-48ea-ad67-d90848f54e0b/queue/497bd076-b884-4dae-8a08-a022071f7fa7"
+                "QueueId": "arn:aws:connect:ap-northeast-1:アカウントID:instance/インスタンスID/queue/497bd076-b884-4dae-8a08-a022071f7fa7"
               },
               "Identifier": "d68c2a7a-220a-49f5-a068-55043036019e",
               "Type": "UpdateContactTargetQueue",
@@ -472,7 +472,7 @@ Resources:
             },
             {
               "Parameters": {
-                "LambdaFunctionARN": "arn:aws:lambda:ap-northeast-1:197753689022:function:testFukushima",
+                "LambdaFunctionARN": "arn:aws:lambda:ap-northeast-1:アカウントID:function:関数名",
                 "InvocationTimeLimitSeconds": "3",
                 "ResponseValidation": {
                   "ResponseType": "STRING_MAP"
@@ -493,7 +493,7 @@ Resources:
             {
               "Parameters": {
                 "MetricType": "NumberOfAgentsAvailable",
-                "QueueId": "arn:aws:connect:ap-northeast-1:197753689022:instance/1cb2052e-5070-48ea-ad67-d90848f54e0b/queue/497bd076-b884-4dae-8a08-a022071f7fa7"
+                "QueueId": "arn:aws:connect:ap-northeast-1:アカウントID:instance/インスタンスID/queue/497bd076-b884-4dae-8a08-a022071f7fa7"
               },
               "Identifier": "4bc973f2-99d0-45f0-a9ca-6001cbf4dbfc",
               "Type": "CheckMetricData",

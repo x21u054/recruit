@@ -17,7 +17,7 @@ Resources:
       ProvisionedThroughput:
         ReadCapacityUnits: 5
         WriteCapacityUnits: 5
-      TableName: "intellilink-internship-2023-summer-test_rest_biz"
+      TableName: "テーブル名"
       Tags: 
         - Key: "intern"
           Value: "intern"

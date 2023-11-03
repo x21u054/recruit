@@ -9,4 +9,4 @@ Resources:
       State: ENABLED
       Targets:
         - Id: MyLambdaTarge
-          Arn: arn:aws:lambda:ap-northeast-1:197753689022:function:csvToDynamodbFunction_biz
+          Arn: arn:aws:lambda:ap-northeast-1:アカウントID:function:csvToDynamodbFunction_biz

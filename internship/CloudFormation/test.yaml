@@ -14,7 +14,7 @@ Resources:
           KeyType: HASH
         - AttributeName: day
           KeyType: RANGE
-      TableName: "intellilink-internship-2023-summer-test_rest_biz"
+      TableName: "テーブル名"
       Tags: 
         - Key: "intern"
           Value: "intern"
@@ -36,8 +36,6 @@ Resources:
             
             def lambda_handler(event, context):
                 initLogger()
-                _logger.info('testFukushima: start\n')
-            
                 # TODO implement
                 #Amazon Connectからインスタンスとキューを取得
                 _logger.info('Amazon Connectからインスタンスとキューを取得\n')
@@ -81,8 +79,8 @@ Resources:
                 #DynamoDBからインスタンス、キュー、現在日時を基にレコードを取得
                 _logger.info('DynamoDBからインスタンス、キュー、現在日時を基にレコードを取得\n')
                 #テーブル名とパーティションキーのマッピング
-                if instanceName == "intellilink-internship-2023-summer-test":
-                    tableName = 'intellilink-internship-2023-summer-test_rest_biz'
+                if instanceName == "インスタンス名":
+                    tableName = 'テーブル名'
                     _logger.info('DynamoDBのテーブルとインスタンス名の紐づけに成功しました\n')
                 else:
                     _logger.info('DynamoDBのテーブルとインスタンス名の紐づけに失敗しました\n')
@@ -344,7 +342,7 @@ Resources:
   MyS3Bucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: intellilink-internship-2023-summer-bucket-biz
+      BucketName: バケット名
   MyS3Folder:
     Type: AWS::S3::Bucket
     Properties:
@@ -388,8 +386,8 @@ Resources:
             
                 #S3からCSVファイルを読み込む
                 s3 = boto3.client('s3')
-                bucket_name = 'intellilink-internship-2023-summer-bucket-biz'
-                csv_file_key = 'schedule/intellilink-internship-2023-summer-test_rest.csv'
+                bucket_name = 'バケット名'
+                csv_file_key = 'CSVファイル名'
                 response = s3.get_object(Bucket=bucket_name, Key=csv_file_key)
                 
                 #CSVデータをテキストモードで読み込む
@@ -409,7 +407,7 @@ Resources:
                 #DynamoDBへの書き込み
                 dynamodb = boto3.client('dynamodb')
                 
-                table_name = 'intellilink-internship-2023-summer-test_rest_biz'
+                table_name = 'テーブル名'
                 
                 response = dynamodb.scan(TableName=table_name)
                 ddb_records = response['Items']
@@ -623,7 +621,7 @@ Resources:
       State: ENABLED
       Targets:
         - Id: MyLambdaTarge
-          Arn: arn:aws:lambda:ap-northeast-1:197753689022:function:csvToDynamodbFunction_biz
+          Arn: arn:aws:lambda:ap-northeast-1:アカウントID:function:csvToDynamodbFunction_biz
 Outputs:
   QueryIsOpenFunctionArn:
     Value: !GetAtt QueryIsOpenFunction.Arn

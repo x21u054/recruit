@@ -23,8 +23,8 @@ Resources:
             
                 #S3からCSVファイルを読み込む
                 s3 = boto3.client('s3')
-                bucket_name = 'intellilink-internship-2023-summer-bucket-biz'
-                csv_file_key = 'schedule/intellilink-internship-2023-summer-test_rest.csv'
+                bucket_name = 'バケット名'
+                csv_file_key = 'CSVファイル名'
                 response = s3.get_object(Bucket=bucket_name, Key=csv_file_key)
                 
                 #CSVデータをテキストモードで読み込む
@@ -44,7 +44,7 @@ Resources:
                 #DynamoDBへの書き込み
                 dynamodb = boto3.client('dynamodb')
                 
-                table_name = 'intellilink-internship-2023-summer-test_rest_biz'
+                table_name = 'テーブル名'
                 
                 response = dynamodb.scan(TableName=table_name)
                 ddb_records = response['Items']
