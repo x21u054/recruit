@@ -1,0 +1,653 @@
+AWSTemplateFormatVersion: '2010-09-09'
+
+Resources:
+  MyContactFlow:
+    Type: AWS::Connect::ContactFlow
+    Properties: 
+      Name: MyContactFlow_biz
+      Description: This is a business contact flow
+      InstanceArn: 'arn:aws:connect:ap-northeast-1:アカウントID:instance/インスタンスID'
+      Type: CONTACT_FLOW
+      Content: |
+        {
+          "Version": "2019-10-30",
+          "StartAction": "caa68cd4-8b2d-48ce-95aa-0dea987de8d8",
+          "Metadata": {
+            "entryPointPosition": {
+              "x": 40,
+              "y": 39.2
+            },
+            "ActionMetadata": {
+              "7ea862ff-9a1c-4ab1-8fb5-60321b4ae340": {
+                "position": {
+                  "x": 140.8,
+                  "y": 262.4
+                },
+                "parameters": {
+                  "EventHooks": {
+                    "AgentWhisper": {
+                      "displayName": "Default agent whisper"
+                    }
+                  }
+                },
+                "contactFlow": {
+                  "text": "Default agent whisper",
+                  "id": "arn:aws:connect:ap-northeast-1:アカウントID:instance/インスタンスID/contact-flow/4327c33b-504c-46ac-aca3-f403b1337c00"
+                },
+                "customerOrAgent": false
+              },
+              "fb0c7527-6561-49b3-a6df-cade102a9ece": {
+                "position": {
+                  "x": 360,
+                  "y": 260.8
+                },
+                "parameters": {
+                  "EventHooks": {
+                    "CustomerWhisper": {
+                      "displayName": "Default customer whisper"
+                    }
+                  }
+                },
+                "contactFlow": {
+                  "text": "Default customer whisper",
+                  "id": "arn:aws:connect:ap-northeast-1:アカウントID:instance/インスタンスID/contact-flow/7656b28f-1130-4414-a389-fa17eb4feec9"
+                },
+                "customerOrAgent": true
+              },
+              "caa68cd4-8b2d-48ce-95aa-0dea987de8d8": {
+                "position": {
+                  "x": 135.2,
+                  "y": 39.2
+                }
+              },
+              "66111464-8eeb-4f40-8979-732fa7094c3a": {
+                "position": {
+                  "x": 362.4,
+                  "y": 40
+                },
+                "overrideConsoleVoice": true
+              },
+              "ad717a0c-46fd-47a5-b9d4-1b1e7bd27efe": {
+                "position": {
+                  "x": 1018.4,
+                  "y": 40
+                },
+                "parameters": {
+                  "EventHooks": {
+                    "CustomerHold": {
+                      "displayName": "Default customer hold"
+                    }
+                  }
+                },
+                "contactFlow": {
+                  "text": "Default customer hold",
+                  "id": "arn:aws:connect:ap-northeast-1:アカウントID:instance/インスタンスID/contact-flow/d24dde04-e967-44f8-adff-dc45acdff953"
+                },
+                "customerOrAgent": true
+              },
+              "71ef7e37-ce83-456f-aeea-1faa2d62c47b": {
+                "position": {
+                  "x": 580,
+                  "y": 39.2
+                }
+              },
+              "b36eb868-2375-43ad-8a1f-5c93a17500ae": {
+                "position": {
+                  "x": 794.4,
+                  "y": 38.4
+                },
+                "parameters": {
+                  "EventHooks": {
+                    "AgentHold": {
+                      "displayName": "Default agent hold"
+                    }
+                  }
+                },
+                "contactFlow": {
+                  "text": "Default agent hold",
+                  "id": "arn:aws:connect:ap-northeast-1:アカウントID:instance/インスタンスID/contact-flow/f791902a-90c5-438b-8b3f-f51e2bb86df3"
+                },
+                "customerOrAgent": false
+              },
+              "142182e9-f988-4377-8656-f8c9e991f1b1": {
+                "position": {
+                  "x": 585.6,
+                  "y": 262.4
+                },
+                "parameters": {
+                  "EventHooks": {
+                    "CustomerQueue": {
+                      "displayName": "Default customer queue"
+                    }
+                  }
+                },
+                "contactFlow": {
+                  "text": "Default customer queue",
+                  "id": "arn:aws:connect:ap-northeast-1:アカウントID:instance/インスタンスID/contact-flow/49021e03-7dea-4515-98c8-e9752ea46245"
+                },
+                "customerOrAgent": true
+              },
+              "ed99a729-d2ff-4031-9677-11bd476ee7d9": {
+                "position": {
+                  "x": 806.4,
+                  "y": 258.4
+                }
+              },
+              "d68c2a7a-220a-49f5-a068-55043036019e": {
+                "position": {
+                  "x": 1035.2,
+                  "y": 284
+                },
+                "parameters": {
+                  "QueueId": {
+                    "displayName": "BasicQueue"
+                  }
+                },
+                "queue": {
+                  "text": "BasicQueue"
+                }
+              },
+              "16bde257-20bf-413a-82e6-da7a28d8fb64": {
+                "position": {
+                  "x": 363.2,
+                  "y": 478.4
+                },
+                "conditions": [],
+                "conditionMetadata": [
+                  {
+                    "id": "962ecddc-4ab5-46c3-8319-fefdf7e14d46",
+                    "operator": {
+                      "name": "Equals",
+                      "value": "Equals",
+                      "shortDisplay": "="
+                    },
+                    "value": "true"
+                  },
+                  {
+                    "id": "34f9b8d4-3119-4a5a-8a39-5adf040f99f4",
+                    "operator": {
+                      "name": "Equals",
+                      "value": "Equals",
+                      "shortDisplay": "="
+                    },
+                    "value": "false"
+                  }
+                ]
+              },
+              "d5096da1-9669-4199-8cb7-987087cd394c": {
+                "position": {
+                  "x": 139.2,
+                  "y": 484
+                },
+                "parameters": {
+                  "LambdaFunctionARN": {
+                      "displayName": "queryIsOpenFunction_biz"
+                  }
+                },
+                "dynamicMetadata": {}
+              },
+              "4bc973f2-99d0-45f0-a9ca-6001cbf4dbfc": {
+                "position": {
+                  "x": 632.8,
+                  "y": 484
+                },
+                "parameters": {
+                  "QueueId": {
+                    "displayName": "BasicQueue"
+                  }
+                },
+                "queue": {
+                  "text": "BasicQueue",
+                  "id": "arn:aws:connect:ap-northeast-1:アカウントID:instance/インスタンスID/queue/497bd076-b884-4dae-8a08-a022071f7fa7"
+                }
+              },
+              "4d03cbcb-1819-43cf-a2a9-9a97509003a5": {
+                "position": {
+                  "x": 1081.6,
+                  "y": 648.8
+                }
+              },
+              "15b5a76f-02f5-4b74-9e5f-b4051fccd3d9": {
+                "position": {
+                  "x": 1294.4,
+                  "y": 460.8
+                }
+              },
+              "79cdd0fb-d1e7-427e-bd30-faac8fafa919": {
+                "position": {
+                  "x": 1541.6,
+                  "y": 505.6
+                }
+              },
+              "5dc9c595-98c4-4c98-8045-60af8a1aa521": {
+                "position": {
+                  "x": 364,
+                  "y": 705.6
+                }
+              },
+              "b16a5c69-8e7b-4305-9ad4-d3eb80424bb5": {
+                "position": {
+                  "x": 602.4,
+                  "y": 701.6
+                }
+              },
+              "32950df5-ef24-439b-9daf-f25eb76a062a": {
+                "position": {
+                  "x": 136,
+                  "y": 698.4
+                }
+              },
+              "839c4b79-c655-4068-a548-7b57760d4ae4": {
+                "position": {
+                  "x": 850.4,
+                  "y": 655.2
+                }
+              },
+              "8c9ad9d7-3075-4c21-a09c-9a53dfafa8fa": {
+                "position": {
+                  "x": 1309.6,
+                  "y": 648.8
+                }
+              },
+              "ac23c26b-0936-4307-aeb8-b7b80b22ced8": {
+                "position": {
+                  "x": 1601.6,
+                  "y": 814.4
+                }
+              }
+            },
+            "Annotations": []
+          },
+          "Actions": [
+            {
+              "Parameters": {
+                "EventHooks": {
+                  "AgentWhisper": "arn:aws:connect:ap-northeast-1:アカウントID:instance/インスタンスID/contact-flow/4327c33b-504c-46ac-aca3-f403b1337c00"
+                }
+              },
+              "Identifier": "7ea862ff-9a1c-4ab1-8fb5-60321b4ae340",
+              "Type": "UpdateContactEventHooks",
+              "Transitions": {
+                "NextAction": "fb0c7527-6561-49b3-a6df-cade102a9ece",
+                "Errors": [
+                  {
+                    "NextAction": "fb0c7527-6561-49b3-a6df-cade102a9ece",
+                    "ErrorType": "NoMatchingError"
+                  }
+                ]
+              }
+            },
+            {
+              "Parameters": {
+                "EventHooks": {
+                  "CustomerWhisper": "arn:aws:connect:ap-northeast-1:アカウントID:instance/インスタンスID/contact-flow/7656b28f-1130-4414-a389-fa17eb4feec9"
+                }
+              },
+              "Identifier": "fb0c7527-6561-49b3-a6df-cade102a9ece",
+              "Type": "UpdateContactEventHooks",
+              "Transitions": {
+                "NextAction": "142182e9-f988-4377-8656-f8c9e991f1b1",
+                "Errors": [
+                  {
+                    "NextAction": "142182e9-f988-4377-8656-f8c9e991f1b1",
+                    "ErrorType": "NoMatchingError"
+                  }
+                ]
+              }
+            },
+            {
+              "Parameters": {
+                "FlowLoggingBehavior": "Enabled"
+              },
+              "Identifier": "caa68cd4-8b2d-48ce-95aa-0dea987de8d8",
+              "Type": "UpdateFlowLoggingBehavior",
+              "Transitions": {
+                "NextAction": "66111464-8eeb-4f40-8979-732fa7094c3a"
+              }
+            },
+            {
+              "Parameters": {
+                "TextToSpeechEngine": "Neural",
+                "TextToSpeechStyle": "None",
+                "TextToSpeechVoice": "Tomoko"
+              },
+              "Identifier": "66111464-8eeb-4f40-8979-732fa7094c3a",
+              "Type": "UpdateContactTextToSpeechVoice",
+              "Transitions": {
+                "NextAction": "71ef7e37-ce83-456f-aeea-1faa2d62c47b"
+              }
+            },
+            {
+              "Parameters": {
+                "EventHooks": {
+                  "CustomerHold": "arn:aws:connect:ap-northeast-1:アカウントID:instance/インスタンスID/contact-flow/d24dde04-e967-44f8-adff-dc45acdff953"
+                }
+              },
+              "Identifier": "ad717a0c-46fd-47a5-b9d4-1b1e7bd27efe",
+              "Type": "UpdateContactEventHooks",
+              "Transitions": {
+                "NextAction": "7ea862ff-9a1c-4ab1-8fb5-60321b4ae340",
+                "Errors": [
+                  {
+                    "NextAction": "7ea862ff-9a1c-4ab1-8fb5-60321b4ae340",
+                    "ErrorType": "NoMatchingError"
+                  }
+                ]
+              }
+            },
+            {
+              "Parameters": {
+                "RecordingBehavior": {
+                  "RecordedParticipants": [
+                    "Agent",
+                    "Customer"
+                  ]
+                },
+                "AnalyticsBehavior": {
+                  "Enabled": "True",
+                  "AnalyticsLanguage": "ja-JP",
+                  "AnalyticsRedactionBehavior": "Disabled",
+                  "AnalyticsRedactionResults": "None",
+                  "ChannelConfiguration": {
+                    "Chat": {
+                      "AnalyticsModes": []
+                    },
+                    "Voice": {
+                      "AnalyticsModes": [
+                        "PostContact"
+                      ]
+                    }
+                  }
+                }
+              },
+              "Identifier": "71ef7e37-ce83-456f-aeea-1faa2d62c47b",
+              "Type": "UpdateContactRecordingBehavior",
+              "Transitions": {
+                "NextAction": "b36eb868-2375-43ad-8a1f-5c93a17500ae"
+              }
+            },
+            {
+              "Parameters": {
+                "EventHooks": {
+                  "AgentHold": "arn:aws:connect:ap-northeast-1:アカウントID:instance/インスタンスID/contact-flow/f791902a-90c5-438b-8b3f-f51e2bb86df3"
+                }
+              },
+              "Identifier": "b36eb868-2375-43ad-8a1f-5c93a17500ae",
+              "Type": "UpdateContactEventHooks",
+              "Transitions": {
+                "NextAction": "ad717a0c-46fd-47a5-b9d4-1b1e7bd27efe",
+                "Errors": [
+                  {
+                    "NextAction": "ad717a0c-46fd-47a5-b9d4-1b1e7bd27efe",
+                    "ErrorType": "NoMatchingError"
+                  }
+                ]
+              }
+            },
+            {
+              "Parameters": {
+                "EventHooks": {
+                  "CustomerQueue": "arn:aws:connect:ap-northeast-1:アカウントID:instance/インスタンスID/contact-flow/49021e03-7dea-4515-98c8-e9752ea46245"
+                }
+              },
+              "Identifier": "142182e9-f988-4377-8656-f8c9e991f1b1",
+              "Type": "UpdateContactEventHooks",
+              "Transitions": {
+                "NextAction": "ed99a729-d2ff-4031-9677-11bd476ee7d9",
+                "Errors": [
+                  {
+                    "NextAction": "ed99a729-d2ff-4031-9677-11bd476ee7d9",
+                    "ErrorType": "NoMatchingError"
+                  }
+                ]
+              }
+            },
+            {
+              "Parameters": {
+                "Text": "テストコールです。"
+              },
+              "Identifier": "ed99a729-d2ff-4031-9677-11bd476ee7d9",
+              "Type": "MessageParticipant",
+              "Transitions": {
+                "NextAction": "d68c2a7a-220a-49f5-a068-55043036019e",
+                "Errors": [
+                  {
+                    "NextAction": "d68c2a7a-220a-49f5-a068-55043036019e",
+                    "ErrorType": "NoMatchingError"
+                  }
+                ]
+              }
+            },
+            {
+              "Parameters": {
+                "QueueId": "arn:aws:connect:ap-northeast-1:アカウントID:instance/インスタンスID/queue/497bd076-b884-4dae-8a08-a022071f7fa7"
+              },
+              "Identifier": "d68c2a7a-220a-49f5-a068-55043036019e",
+              "Type": "UpdateContactTargetQueue",
+              "Transitions": {
+                "NextAction": "d5096da1-9669-4199-8cb7-987087cd394c",
+                "Errors": [
+                  {
+                    "NextAction": "d5096da1-9669-4199-8cb7-987087cd394c",
+                    "ErrorType": "NoMatchingError"
+                  }
+                ]
+              }
+            },
+            {
+              "Parameters": {
+                "ComparisonValue": "$.External.keyIsOpen"
+              },
+              "Identifier": "16bde257-20bf-413a-82e6-da7a28d8fb64",
+              "Type": "Compare",
+              "Transitions": {
+                "NextAction": "5dc9c595-98c4-4c98-8045-60af8a1aa521",
+                "Conditions": [
+                  {
+                    "NextAction": "4bc973f2-99d0-45f0-a9ca-6001cbf4dbfc",
+                    "Condition": {
+                      "Operator": "Equals",
+                      "Operands": [
+                        "true"
+                      ]
+                    }
+                  },
+                  {
+                    "NextAction": "b16a5c69-8e7b-4305-9ad4-d3eb80424bb5",
+                    "Condition": {
+                      "Operator": "Equals",
+                      "Operands": [
+                        "false"
+                      ]
+                    }
+                  }
+                ],
+                "Errors": [
+                  {
+                    "NextAction": "5dc9c595-98c4-4c98-8045-60af8a1aa521",
+                    "ErrorType": "NoMatchingCondition"
+                  }
+                ]
+              }
+            },
+            {
+              "Parameters": {
+                "LambdaFunctionARN": "arn:aws:lambda:ap-northeast-1:アカウントID:function:関数名",
+                "InvocationTimeLimitSeconds": "3",
+                "ResponseValidation": {
+                  "ResponseType": "STRING_MAP"
+                }
+              },
+              "Identifier": "d5096da1-9669-4199-8cb7-987087cd394c",
+              "Type": "InvokeLambdaFunction",
+              "Transitions": {
+                "NextAction": "16bde257-20bf-413a-82e6-da7a28d8fb64",
+                "Errors": [
+                  {
+                    "NextAction": "32950df5-ef24-439b-9daf-f25eb76a062a",
+                    "ErrorType": "NoMatchingError"
+                  }
+                ]
+              }
+            },
+            {
+              "Parameters": {
+                "MetricType": "NumberOfAgentsAvailable",
+                "QueueId": "arn:aws:connect:ap-northeast-1:アカウントID:instance/インスタンスID/queue/497bd076-b884-4dae-8a08-a022071f7fa7"
+              },
+              "Identifier": "4bc973f2-99d0-45f0-a9ca-6001cbf4dbfc",
+              "Type": "CheckMetricData",
+              "Transitions": {
+                "NextAction": "839c4b79-c655-4068-a548-7b57760d4ae4",
+                "Conditions": [
+                  {
+                    "NextAction": "15b5a76f-02f5-4b74-9e5f-b4051fccd3d9",
+                    "Condition": {
+                      "Operator": "NumberGreaterThan",
+                      "Operands": [
+                        "0"
+                      ]
+                    }
+                  }
+                ],
+                "Errors": [
+                  {
+                    "NextAction": "4d03cbcb-1819-43cf-a2a9-9a97509003a5",
+                    "ErrorType": "NoMatchingCondition"
+                  },
+                  {
+                    "NextAction": "839c4b79-c655-4068-a548-7b57760d4ae4",
+                    "ErrorType": "NoMatchingError"
+                  }
+                ]
+              }
+            },
+            {
+              "Parameters": {
+                "Text": "電話に出ることができません。"
+              },
+              "Identifier": "4d03cbcb-1819-43cf-a2a9-9a97509003a5",
+              "Type": "MessageParticipant",
+              "Transitions": {
+                "NextAction": "15b5a76f-02f5-4b74-9e5f-b4051fccd3d9",
+                "Errors": [
+                  {
+                    "NextAction": "15b5a76f-02f5-4b74-9e5f-b4051fccd3d9",
+                    "ErrorType": "NoMatchingError"
+                  }
+                ]
+              }
+            },
+            {
+              "Parameters": {},
+              "Identifier": "15b5a76f-02f5-4b74-9e5f-b4051fccd3d9",
+              "Type": "TransferContactToQueue",
+              "Transitions": {
+                "NextAction": "8c9ad9d7-3075-4c21-a09c-9a53dfafa8fa",
+                "Errors": [
+                  {
+                    "NextAction": "79cdd0fb-d1e7-427e-bd30-faac8fafa919",
+                    "ErrorType": "QueueAtCapacity"
+                  },
+                  {
+                    "NextAction": "8c9ad9d7-3075-4c21-a09c-9a53dfafa8fa",
+                    "ErrorType": "NoMatchingError"
+                  }
+                ]
+              }
+            },
+            {
+              "Parameters": {},
+              "Identifier": "79cdd0fb-d1e7-427e-bd30-faac8fafa919",
+              "Type": "DisconnectParticipant",
+              "Transitions": {}
+            },
+            {
+              "Parameters": {
+                "Text": "ラムダの戻り値エラーです。"
+              },
+              "Identifier": "5dc9c595-98c4-4c98-8045-60af8a1aa521",
+              "Type": "MessageParticipant",
+              "Transitions": {
+                "NextAction": "ac23c26b-0936-4307-aeb8-b7b80b22ced8",
+                "Errors": [
+                  {
+                    "NextAction": "ac23c26b-0936-4307-aeb8-b7b80b22ced8",
+                    "ErrorType": "NoMatchingError"
+                  }
+                ]
+              }
+            },
+            {
+              "Parameters": {
+                "Text": "営業時間外です。"
+              },
+              "Identifier": "b16a5c69-8e7b-4305-9ad4-d3eb80424bb5",
+              "Type": "MessageParticipant",
+              "Transitions": {
+                "NextAction": "ac23c26b-0936-4307-aeb8-b7b80b22ced8",
+                "Errors": [
+                  {
+                    "NextAction": "ac23c26b-0936-4307-aeb8-b7b80b22ced8",
+                    "ErrorType": "NoMatchingError"
+                  }
+                ]
+              }
+            },
+            {
+              "Parameters": {
+                "Text": "ラムダの呼び出しエラーです。"
+              },
+              "Identifier": "32950df5-ef24-439b-9daf-f25eb76a062a",
+              "Type": "MessageParticipant",
+              "Transitions": {
+                "NextAction": "ac23c26b-0936-4307-aeb8-b7b80b22ced8",
+                "Errors": [
+                  {
+                    "NextAction": "ac23c26b-0936-4307-aeb8-b7b80b22ced8",
+                    "ErrorType": "NoMatchingError"
+                  }
+                ]
+              }
+            },
+            {
+              "Parameters": {
+                "Text": "人員の確認エラーです。"
+              },
+              "Identifier": "839c4b79-c655-4068-a548-7b57760d4ae4",
+              "Type": "MessageParticipant",
+              "Transitions": {
+                "NextAction": "ac23c26b-0936-4307-aeb8-b7b80b22ced8",
+                "Errors": [
+                  {
+                    "NextAction": "ac23c26b-0936-4307-aeb8-b7b80b22ced8",
+                    "ErrorType": "NoMatchingError"
+                  }
+                ]
+              }
+            },
+            {
+              "Parameters": {
+                "Text": "キューへの転送エラーです。"
+              },
+              "Identifier": "8c9ad9d7-3075-4c21-a09c-9a53dfafa8fa",
+              "Type": "MessageParticipant",
+              "Transitions": {
+                "NextAction": "ac23c26b-0936-4307-aeb8-b7b80b22ced8",
+                "Errors": [
+                  {
+                    "NextAction": "ac23c26b-0936-4307-aeb8-b7b80b22ced8",
+                    "ErrorType": "NoMatchingError"
+                  }
+                ]
+              }
+            },
+            {
+              "Parameters": {},
+              "Identifier": "ac23c26b-0936-4307-aeb8-b7b80b22ced8",
+              "Type": "DisconnectParticipant",
+              "Transitions": {}
+            }
+          ]
+        }        
+        

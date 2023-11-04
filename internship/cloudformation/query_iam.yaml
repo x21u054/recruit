@@ -1,0 +1,39 @@
+AWSTemplateFormatVersion: '2010-09-09'
+
+Resources:
+  QueryIsOpenFunctionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: queryIsOpenFunctionRole_biz
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service:
+            - lambda.amazonaws.com
+          Action:
+          - sts:AssumeRole
+  QueryIsOpenFunctionRolePolicy:
+    DependsOn: QueryIsOpenFunctionRole
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: queryIsOpenFunctionRolePolicy_biz
+      Roles:
+        - !Ref QueryIsOpenFunctionRole
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Action:
+              - logs:CreateLogGroup
+              - logs:CreateLogStream
+              - logs:PutLogEvents
+              - ds:DescribeDirectories
+              - connect:DescribeInstance
+              - dynamodb:query
+            Resource:
+              - "*"
+              - "arn:aws:logs:ap-northeast-1:アカウントID:*"
+              - "arn:aws:connect:ap-northeast-1:アカウントID:instance/インスタンスID"
+              - "arn:aws:dynamodb:ap-northeast-1:アカウントID:table/テーブルID"

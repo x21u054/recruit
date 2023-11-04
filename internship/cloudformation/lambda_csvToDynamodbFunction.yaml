@@ -1,0 +1,257 @@
+AWSTemplateFormatVersion: '2010-09-09'
+
+Resources:
+  CsvToDynamodbFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: csvToDynamodbFunction_biz
+      Handler: index.handler
+      Role: !GetAtt CsvToDynamodbFunctionRole.Arn
+      Code:
+        ZipFile: |
+            import json
+            import boto3
+            import csv
+            import logging
+            import os
+            import datetime
+            
+            _logger = logging.getLogger()
+            
+            def lambda_handler(event, context):
+                initLogger()
+            
+                #S3からCSVファイルを読み込む
+                s3 = boto3.client('s3')
+                bucket_name = 'バケット名'
+                csv_file_key = 'CSVファイル名'
+                response = s3.get_object(Bucket=bucket_name, Key=csv_file_key)
+                
+                #CSVデータをテキストモードで読み込む
+                csv_data = response['Body'].read().decode('utf-8')
+            
+                _logger.info('CSVデータ : ' + str(csv_data) + '\n')
+                
+                #CSVデータを行ごとに分割し、各行をリストとして解析
+                csv_rows = csv_data.splitlines()
+                
+                #CSVデータを解析し行と列に分ける
+                csv_reader = csv.reader(csv_rows, delimiter=',')
+                
+                #ヘッダ行をスキップする
+                header = next(csv_reader)
+            
+                #DynamoDBへの書き込み
+                dynamodb = boto3.client('dynamodb')
+                
+                table_name = 'テーブル名'
+                
+                response = dynamodb.scan(TableName=table_name)
+                ddb_records = response['Items']
+                _logger.info('ddb test start\n')
+                for item in ddb_records:
+                    print(item)
+                
+                csv_records = []
+                for row in csv_reader:
+                    #値を取得
+                    queue = row[0] if row[0] else None
+                    day = row[1] if row[1] else None
+                    isHoliday = row[2] if row[2] else None
+                    isTempHoliday = row[3] if row[3] else None
+                    startTempClosingTime = row[4] if row[4] else None
+                    endTempClosingTime = row[5] if row[5] else None
+                    
+                    _logger.info('queue : ' + str(queue) + '\n')
+                    _logger.info('day : ' + str(day) + '\n')
+                    _logger.info('isHoliday : ' + str(isHoliday) + '\n')
+                    _logger.info('isTempHoliday : ' + str(isTempHoliday) + '\n')
+                    _logger.info('startTempClosingTime : ' + str(startTempClosingTime) + '\n')
+                    _logger.info('endTempClosingTime : ' + str(endTempClosingTime) + '\n')
+                    
+                    #日付を適切な形式にフォーマット
+                    day = datetime.datetime.strptime(day, "%Y/%m/%d")
+                    day = datetime.datetime.strftime(day, "%Y-%m-%d")
+                    _logger.info('day : ' + day + '\n')
+                    
+                    if isHoliday is not None:
+                        _logger.info('isHoliday属性が該当しました\n')
+                        
+                        #isHolidayの値を文字列からBOOL値に変換
+                        if isHoliday.lower() == 'true':
+                            isHoliday = True
+                        else:
+                            isHoliday = False
+                        
+                        item = {
+                            'queue': {'S': queue},
+                            'day': {'S': day},
+                            'isHoliday': {'BOOL': isHoliday}
+                        }
+                    elif isTempHoliday is not None:
+                        _logger.info('isTempHoliday属性が該当しました\n')
+                        
+                        #isTempHolidayの値を文字列からBOOL値に変換
+                        if isTempHoliday.lower() == 'true':
+                            isTempHoliday = True
+                        else:
+                            isTempHoliday = False
+            
+                        item = {
+                            'queue': {'S': queue},
+                            'day': {'S': day},
+                            'isTempHoliday': {'BOOL': isTempHoliday}
+                        }
+                    elif startTempClosingTime and endTempClosingTime is not None:
+                        _logger.info('startTempClosingTime属性とendTempClosingTime属性が該当しました\n')
+                        item = {
+                            'queue': {'S': queue},
+                            'day': {'S': day},
+                            'startTempClosingTime': {'S': startTempClosingTime},
+                            'endTempClosingTime': {'S': endTempClosingTime}
+                        }
+                    else:
+                        _logger.info('属性が存在しません')
+                        return
+                    csv_records.append(item)
+                    #response = dynamodb.put_item(TableName=table_name, Item=item)
+                    #_logger.info('DynamoDB put_itemの実行結果 : ' + str(response) + '\n')
+            
+                _logger.info('csv test start\n')
+                for item in csv_records:
+                    print(item)
+                
+                #レコードを格納するリスト
+                new_records = []
+                update_records = []
+                delete_records = []
+                
+                #CSVファイルのデータとDynamoDBテーブルのデータを比較
+                _logger.info('CSVファイルのデータとDynamoDBテーブルのデータを比較\n')
+                for csv_record in csv_records:
+                    csv_key = csv_record['queue']['S'] + csv_record['day']['S']
+                    ddb_record = next((record for record in ddb_records if record['queue']['S'] + record['day']['S'] == csv_key), None)
+                    
+                    if ddb_record is None:
+                        _logger.info('ddb_record is None\n')
+                        new_records.append(csv_record)
+                    elif ddb_record != csv_record:
+                        _logger.info('ddb_record != csv_record\n')
+                        update_records.append(csv_record)
+                
+                #DynamoDBテーブルのデータとCSVファイルのデータを比較
+                _logger.info('DynamoDBテーブルのデータとCSVファイルのデータを比較\n')
+                for ddb_record in ddb_records:
+                    ddb_key = ddb_record['queue']['S'] + ddb_record['day']['S']
+                    csv_record = next((record for record in csv_records if record['queue']['S'] + record['day']['S'] == ddb_key), None)
+                    _logger.info('ddb_record : ' + str(ddb_record) + '\n')
+                    _logger.info('csv_record : ' + str(csv_record) + '\n')
+                    if csv_record is None:
+                        _logger.info('csv_record is None\n')
+                        delete_records.append(ddb_record)
+                
+                #レコードの追加
+                _logger.info('レコードの追加\n')
+                for record in new_records:
+                    _logger.info('record : ' + str(record) + '\n')
+                    dynamodb.put_item(TableName=table_name, Item=record)
+                
+                #レコードの更新
+                _logger.info('レコードの更新\n')
+                for record in update_records:
+                    _logger.info('record : ' + str(record) + '\n')
+                    dynamodb.put_item(TableName=table_name, Item=record)
+                
+                #レコードの削除
+                _logger.info('レコードの削除\n')
+                for record in delete_records:
+                    key = {
+                        'queue': {'S' : record['queue']['S']}, 
+                        'day': {'S' : record['day']['S']}
+            
+                    }
+                    _logger.info('record : ' + str(key) + '\n')
+                    dynamodb.delete_item(TableName=table_name, Key=key)
+                    
+            # 【Logger初期設定処理】
+            # 【INPUT】 なし
+            # 【OUTPUT】なし
+            # 【処理概要】
+            #　　loggerのLOGレベルとフォーマットを環境変数から設定する
+            def initLogger():
+                # 環境変数からLOG_LEVELを取得して設定する
+                # 0:NOTSET 10:DEBUG 20:INFO 30:WARNING 40:ERROR 50:CRITICAL
+                try:
+                    wLogLevel = os.environ['LOG_LEVEL']
+                except KeyError as err:
+                    # LOG_LEVELが未定義の場合【INFO】を適用する
+                    _logger.warning('LOG_LEVEL Not Configuration\n')
+                    wLogLevel = '20'
+                try:
+                    iLogLevel = int(wLogLevel)
+                except:
+                    # LOG_LEVELが数字以外の場合【INFO】を適用する
+                    _logger.warning('LOG_LEVEL Bad Configuration:' +wLogLevel +'\n')
+                    iLogLevel = 20
+                    
+                _logger.setLevel(iLogLevel)
+                
+                # 環境変数からフォーマットを設定する
+                try:
+                    wLogFormat = os.environ['LOG_FORMAT']
+                    formatter = logging.Formatter(
+                        wLogFormat
+                    )
+                    for handler in _logger.handlers:
+                        handler.setFormatter(formatter)
+                except KeyError as err:
+                    # LOG_FORMATが未定義の場合[%(levelname)s] %(message)sを適用する
+                    _logger.warning('LOG_FORMAT Not Configuration\n')
+                    wLogFormat = '[%(levelname)s] %(message)s'
+                    formatter = logging.Formatter(
+                        wLogFormat
+                    )
+                    for handler in _logger.handlers:
+                        handler.setFormatter(formatter)
+            
+                return
+      Runtime: python3.11
+      Enviroment:
+        Varriables:
+          LOG_LEVEL: "20"
+          LOG_FORMAT: "[%(levelname)s] %(message)s"
+  CsvToDynamodbFunctionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: csvToDynamodbFunctionRole_biz
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service:
+            - lambda.amazonaws.com
+          Action:
+          - sts:AssumeRole
+  CsvToDynamodbFunctionRolePolicy:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: csvToDynamodbFunctionRolePolicy_biz
+      Roles:
+        - !Ref CsvToDynamodbFunctionRole
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Action:
+              - logs:*
+              - dynamodb:Scan
+              - dynamodb:PutItem
+              - dynamodb:DeleteItem
+              - s3:GetObject
+            Resource: "arn:aws:*"
+Outputs:
+  QueryIsOpenFunctionArn:
+    Value: !GetAtt CsvToDynamodbFunction.Arn
+  QueryIsOpenFunctionName:
+    Value: !Ref CsvToDynamodbFunction
