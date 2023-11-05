@@ -15,8 +15,8 @@ import entity.EmailVerify;
 
 public class SendEmail {
 	public void execute(EmailVerify emailVerify) {
-		final String username = "mail.campuscraft@gmail.com";
-		final String password = "ybqm edqz plrh hmcp";
+		final String username = "メールアドレス";
+		final String password = "パスワード";
 		String recipientEmail = emailVerify.getEmail(); // 送信先のメールアドレス
 
 		Properties props = new Properties();
