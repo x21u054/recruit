@@ -41,13 +41,28 @@ public class ConfirmServlet extends HttpServlet {
 		EmailVerifyDao emailVerifyDao = new EmailVerifyDao();
 		EmailVerify emailVerify = emailVerifyDao.findEmailVerifyByToken(token);
 
+		String forward = "/WEB-INF/jsp/index.jsp";
 		if (emailVerify != null) {
-			HttpSession session = request.getSession();
-			session.setAttribute("email", emailVerify.getEmail());
-		} else {
+			long tokenExpirationMillis = emailVerify.getExpiration();
+			
+			long currentTimestamp = System.currentTimeMillis();
+			
+			// トークンの有効期限内かどうかを判定
+			if (currentTimestamp < tokenExpirationMillis) {
+			    	System.out.println("トークンは有効です。");
 
+				HttpSession session = request.getSession();
+				session.setAttribute("email", emailVerify.getEmail());
+				
+				forward = "/WEB-INF/jsp/confirm.jsp";
+			} else {
+			    System.out.println("トークンは有効期限切れです。");
+			}			
+		} else {
+			//認証トークンが存在しない
+			System.out.println("認証トークンが存在しません");
 		}
-		request.getRequestDispatcher("/WEB-INF/jsp/confirm.jsp").forward(request, response);
+		request.getRequestDispatcher(forward).forward(request, response);
 	}
 
 	/**
